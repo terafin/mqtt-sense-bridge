@@ -1,4 +1,4 @@
-FROM node:6-alpine
+FROM node:7-alpine
 
 RUN mkdir -p /usr/node_app
 COPY . /usr/node_app
