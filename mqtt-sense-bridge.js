@@ -72,17 +72,12 @@ sense({
 			const watts = device.w
 			const id = device.id
 			const name = device.name
-			const icon = device.icon
-			const tags = device.tags
             
-			logging.info('================')
-			logging.info('name: ' + name + '  id: ' + id + '   w: ' + watts) 
-			if ( !_.isNil(tags) ) {
-				const type = tags.Type
-				// logging.info('type: ' + type) 
-			}
+			logging.debug('================')
+			logging.debug('name: ' + name + '  id: ' + id + '   w: ' + watts) 
+
 			client.smartPublish(topic_prefix + '/' + name, watts.toString())
 		})
 	}
-	// logging.info(data) 
+	logging.debug(data) 
 })
