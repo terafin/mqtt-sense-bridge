@@ -6,7 +6,7 @@ const logging = require('homeautomation-js-lib/logging.js')
 const health = require('homeautomation-js-lib/health.js')
 const sense = require('unofficial-sense')
 
-require('homeautomation-js-lib/mqtt_helpers.js')
+const mqtt_helpers = require('homeautomation-js-lib/mqtt_helpers.js')
 
 // Config
 const topic_prefix = process.env.TOPIC_PREFIX
@@ -14,7 +14,7 @@ const username = process.env.SENSE_USERNAME
 const password = process.env.SENSE_PASSWORD
 
 // Setup MQTT
-const client = mqtt.setupClient(null, null)
+const client = mqtt_helpers.setupClient(null, null)
 
 if (_.isNil(topic_prefix)) {
     logging.warn('TOPIC_PREFIX not set, not starting')
@@ -56,7 +56,10 @@ sense({
         health.healthyEvent()
 
     if ( !_.isNil(data.data.payload.devices) ) {
-        const devices = data.data.payload.devices
+        const frame = data.data.payload
+        const devices = frame.devices
+
+        client.smartPublish(topic_prefix + '/watts_total', frame.w.toString())
 
         devices.forEach(device => {
             const watts = device.w
@@ -64,17 +67,16 @@ sense({
             const name = device.name
             const icon = device.icon
             const tags = device.tags
-            
-            logging.info('================')
-            logging.info('name: ' + name + '  id: ' + id + '   w: ' + watts) 
+
+            logging.debug('================')
+            logging.debug('name: ' + name + '  id: ' + id + '   w: ' + watts)
             if ( !_.isNil(tags) ) {
                 const type = tags.Type
-                // logging.info('type: ' + type) 
             }
                 client.smartPublish(topic_prefix + '/' + name, watts.toString())
         });
     }
-    // logging.info(data) 
+    // logging.info(data)
 })
 
 // rainforest.on('energy-updated', (result) => {
