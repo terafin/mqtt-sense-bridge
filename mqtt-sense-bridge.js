@@ -63,7 +63,10 @@ sense({
 	}
 
 	if ( !_.isNil(data.data.payload.devices) ) {
-		const devices = data.data.payload.devices
+		const frame = data.data.payload
+		const devices = frame.devices
+
+		client.smartPublish(topic_prefix + '/watts_total', frame.w.toString())
 
 		devices.forEach(device => {
 			const watts = device.w
@@ -83,22 +86,3 @@ sense({
 	}
 	// logging.info(data) 
 })
-
-// rainforest.on('energy-updated', (result) => {
-
-
-//     Object.keys(result).forEach(
-//         function(key) {
-//             if (key === 'demand_timestamp') return
-
-//             var value = result[key]
-
-//             if (key === 'demand')
-//                 value = Number(value) * 1000
-
-//             logging.info(' ' + key + ':' + value)
-//             client.smartPublish(topic_prefix + '/' + key, '' + value)
-//         }
-//     )
-// })
-
