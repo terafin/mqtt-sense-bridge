@@ -1,22 +1,22 @@
 {
-    "name": "mqtt-sense-bridge",
-    "version": "0.0.1",
-    "description": "Sense Energy Monitor via WS to MQTT",
-    "license": "MIT",
-    "main": "mqtt-sense-bridge.js",
-    "repository": {
-        "url": "https://github.com/terafin/mqtt-sense-bridge"
-    },
-    "scripts": {
-        "start": "node mqtt-sense-bridge.js"
-    },
-    "dependencies": {
-        "homeautomation-js-lib": "git://github.com/terafin/homeautomation-js-lib.git",
-        "lodash": "latest",
-        "mqtt": "latest",
-        "unofficial-sense": "^1.1.4"
-    },
-    "engines": {
-        "node": ">=4"
-    }
+  "name": "mqtt-sense-bridge",
+  "version": "0.0.1",
+  "description": "Sense Energy Monitor via WS to MQTT",
+  "license": "MIT",
+  "main": "mqtt-sense-bridge.js",
+  "repository": {
+    "url": "https://github.com/terafin/mqtt-sense-bridge"
+  },
+  "scripts": {
+    "start": "node mqtt-sense-bridge.js"
+  },
+  "dependencies": {
+    "homeautomation-js-lib": "git://github.com/terafin/homeautomation-js-lib.git",
+    "lodash": "latest",
+    "mqtt": "latest",
+    "unofficial-sense": "^1.1.4"
+  },
+  "engines": {
+    "node": ">=4"
+  }
 }
